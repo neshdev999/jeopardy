@@ -1,0 +1,50 @@
+.formInputContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    height: 160px;
+    max-width: 900px;
+    background-color: antiquewhite;
+    background-color: #FBFBFD;
+    background-color: #F5F5F7;
+}
+
+.formInputItemContent {
+    flex: 1;
+    margin: 5px;
+    text-align: left;
+    padding: 2px;
+}
+
+
+/* Desktop */
+
+@media all and (min-width: 992px) {
+    .formInputContainer {
+        flex-direction: row;
+    }
+}
+
+.buttonsGroupContainer {
+    margin: 5px;
+}
+
+.buttonsGroupContainer>button {
+    padding: 20px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin: 10px;
+}
+
+#categoryOne {
+    display: block;
+}
+
+#categoryTwo {
+    display: block;
+}
+
+#categoryThree {
+    display: block;
+}

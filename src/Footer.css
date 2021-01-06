@@ -1,0 +1,16 @@
+/* Footer */
+
+.FooterContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+}
+
+.Footer {
+    flex: 1;
+    margin: 10px;
+    color: whitesmoke;
+    text-align: center;
+}

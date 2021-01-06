@@ -1,0 +1,36 @@
+/* Header */
+
+.titleHeaderContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+}
+
+.titleHeader {
+    flex: 1;
+    margin-top: 10px;
+    padding: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.titleHeader img {
+    width: 100%;
+}
+
+
+/* Desktop */
+
+@media all and (min-width: 992px) {
+    .titleHeaderContainer {
+        flex-direction: column;
+    }
+    .titleHeader {
+        padding: 5px;
+        margin: 0px;
+    }
+}
