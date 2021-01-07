@@ -1,31 +1,15 @@
 import React from "react";
 import './RoundFirst.css';
-import RoundSecond from './RoundSecond.js';
 import InputControl from './InputControl.js';
-import ClueModal from './ClueModal.js';
-import CategoriesTitle from './CategoriesTitle.js';
 import PopUp from "./PopUp.js"; 
 
 
 // Global Variables
 
-const ReceivedCategories = window.$titleGlobalStore;
-console.log(ReceivedCategories.slice(1,4));
-
 const dailyDoubleNotToConsiderMeIndicatorHolder = [];
-
-// const IntialCategories = ['SPORTS','ANIMALS','SCIENCE'];
-console.log("Tiral Me here");
-console.log(window.$titleGlobalStore);
 const InitialCluesCatgoOne = ['$200', '$400', '$600'];
 const InitialCluesCatgoTwo = ['$200', '$400', '$600'];
 const InitialCluesCatgoThree = ['$200', '$400', '$600'];
-
-// function DisplayCategoriesTitles(){
-//     return (      
-//         <CategoriesTitle />        
-//     );
-// }
 
 class RoundFirst extends React.Component {
 
@@ -75,18 +59,13 @@ class RoundFirst extends React.Component {
         this.showcatTwoQueAnsSixHund = this.showcatTwoQueAnsSixHund.bind(this);
         this.showcatThreeQueAnsTwoHund = this.showcatThreeQueAnsTwoHund.bind(this); 
         this.showcatThreeQueAnsFourHund = this.showcatThreeQueAnsFourHund.bind(this);
-        this.showcatThreeQueAnsSixHund = this.showcatThreeQueAnsSixHund.bind(this);
-        this.togglePop = this.togglePop.bind(this);       
+        this.showcatThreeQueAnsSixHund = this.showcatThreeQueAnsSixHund.bind(this);    
       }
-
-
 
       componentDidMount() {
 
         let getRandomOffsetValue = getRandomArbitrary(10,5000);
         let titleAndAllDataApiUrl = 'http://jservice.io/api/categories?count=15&offset=' + getRandomOffsetValue;
-        // console.log("RandomHere");
-        // console.log(titleAndAllDataApiUrl);
 
         fetch(titleAndAllDataApiUrl)
             .then(response => {
@@ -97,9 +76,6 @@ class RoundFirst extends React.Component {
           })
           .then(response => response.json())
           .then(data => {
-              console.log(data);
-              console.log(data[0].title);
-            // const titleStore = Object.keys(data);
             const tempStore = Object.values(data);
             const titleStore = [];
             const titleIds = [];
@@ -107,40 +83,18 @@ class RoundFirst extends React.Component {
                 titleStore.push(tempStore[i].title);
                 titleIds.push(tempStore[i].id);
             }
-            console.log("checkdata");
-            console.log(titleStore);
-            console.log(titleIds);
-            console.log(titleStore[0]);
-            console.log(titleIds[0]);
-            console.log(titleStore[1]);
-            console.log(titleIds[1]);
-            console.log(titleStore[2]);
-            console.log(titleIds[2]);
-            window.$titleGlobalStore  = titleStore;
-            console.log(titleIds);
-            console.log(titleIds[0]);
-            
-            // const titleStore = tempStore[0].title;
-                //   .map(key => data[key].item[0]);
             this.setState({
               titleStore,
               titleIds,
               error : null
             });
 
-            let firstCatApi = 'http://jservice.io/api/category?id=' + this.state.titleIds[0];
-            console.log(firstCatApi);
-            let getCluesDataOne=this.FetchClues(firstCatApi, '1');
-
-            let secondCatApi = 'http://jservice.io/api/category?id=' + this.state.titleIds[1];
-            console.log(secondCatApi);
-            let getCluesDataTwo=this.FetchClues(secondCatApi, '2');
-
-            let thirdCatApi = 'http://jservice.io/api/category?id=' + this.state.titleIds[2];
-            console.log(thirdCatApi);
-            let getCluesDataThree=this.FetchClues(thirdCatApi, '3');
-
-
+            let firstCatApi = 'http://jservice.io/api/category?id=' + this.state.titleIds[0];    
+            this.FetchClues(firstCatApi, '1');
+            let secondCatApi = 'http://jservice.io/api/category?id=' + this.state.titleIds[1];   
+            this.FetchClues(secondCatApi, '2');
+            let thirdCatApi = 'http://jservice.io/api/category?id=' + this.state.titleIds[2];    
+            this.FetchClues(thirdCatApi, '3');
           })
           .catch(err =>{
               this.setState({
@@ -164,21 +118,14 @@ class RoundFirst extends React.Component {
         })
         .then(response => response.json())
         .then(data => {
-          console.log(data);
-          console.log(data.clues);
-          console.log(data['clues_count']);
-          console.log(data.clues[0]);
+
           var maxRandomLimit = data['clues_count'];
           if(3< parseInt(data['clues_count'])){
             for(let i=0; i<3; i++){
-                var j = getRandomArbitrary(0,maxRandomLimit);
-                console.log(j);
+                var j = getRandomArbitrary(0,maxRandomLimit);       
                 queArray.push(data.clues[j]['question']);
                 ansArray.push(data.clues[j]['answer']);
             }
-            console.log("checkNesh");
-            console.log(queArray);
-            console.log(ansArray);
 
             if(parseInt(catSpecificationId) === 1){
                 this.setState({
@@ -199,18 +146,11 @@ class RoundFirst extends React.Component {
                     error : null
                   });
             }
-
-
           }
         })
         .catch(err =>{
             console.log(err.message);
         });
-        console.log("Nesh Me");
-        console.log(queArray);
-        return(
-            "trial Me BETA"
-        );
       }; 
 
       showModal = () =>{
@@ -299,7 +239,6 @@ class RoundFirst extends React.Component {
 
 
       showcatOneQueAnsTwoHund = () =>{
-        // alert("Question: " + this.state.catOneQues[0] + " Answer: " + this.state.catOneAnswers[0]);
         this.setState({
             seenFirstCatTwoHund: !this.state.seenFirstCatTwoHund
         });
@@ -309,7 +248,6 @@ class RoundFirst extends React.Component {
       };
 
       showcatOneQueAnsFourHund = () =>{
-        // alert("Question: " + this.state.catOneQues[1] + " Answer: " + this.state.catOneAnswers[1]);
         this.setState({
             seenFirstCatFourHund: !this.state.seenFirstCatFourHund
         });
@@ -319,7 +257,6 @@ class RoundFirst extends React.Component {
       };
 
       showcatOneQueAnsSixHund = () =>{
-        // alert("Question: " + this.state.catOneQues[2] + " Answer: " + this.state.catOneAnswers[2]);
         this.setState({
             seenFirstCatSixHund: !this.state.seenFirstCatSixHund
         });
@@ -329,7 +266,6 @@ class RoundFirst extends React.Component {
       };
 
       showcatTwoQueAnsTwoHund = () =>{
-        // alert("Question: " + this.state.catTwoQues[0] + " Answer: " + this.state.catTwoAnswers[0]);
         this.setState({
             seenSecondCatTwoHund: !this.state.seenSecondCatTwoHund
         });
@@ -339,7 +275,6 @@ class RoundFirst extends React.Component {
       };
 
       showcatTwoQueAnsFourHund = () =>{
-        // alert("Question: " + this.state.catTwoQues[1] + " Answer: " + this.state.catTwoAnswers[1]);
         this.setState({
             seenSecondCatFourHund: !this.state.seenSecondCatFourHund
         });
@@ -349,7 +284,6 @@ class RoundFirst extends React.Component {
       };
 
       showcatTwoQueAnsSixHund = () =>{
-        // alert("Question: " + this.state.catTwoQues[2] + " Answer: " + this.state.catTwoAnswers[2]);
         this.setState({
             seenSecondCatSixHund: !this.state.seenSecondCatSixHund
         });
@@ -358,7 +292,6 @@ class RoundFirst extends React.Component {
       };
 
       showcatThreeQueAnsTwoHund = () =>{
-        // alert("Question: " + this.state.catThreeQues[0] + " Answer: " + this.state.catThreeAnswers[0]);
         this.setState({
             seenThirdCatTwoHund: !this.state.seenThirdCatTwoHund
         });
@@ -367,7 +300,6 @@ class RoundFirst extends React.Component {
       }
 
       showcatThreeQueAnsFourHund = () =>{
-        // alert("Question: " + this.state.catThreeQues[1] + " Answer: " + this.state.catThreeAnswers[1]);
         this.setState({
             seenThirdCatFourHund: !this.state.seenThirdCatFourHund
         });
@@ -376,7 +308,6 @@ class RoundFirst extends React.Component {
       }
 
       showcatThreeQueAnsSixHund = () =>{
-        // alert("Question: " + this.state.catThreeQues[2] + " Answer: " + this.state.catThreeAnswers[2]);
         this.setState({
             seenThirdCatSixHund: !this.state.seenThirdCatSixHund
         });
@@ -384,25 +315,11 @@ class RoundFirst extends React.Component {
         this.applyDailyDouble('9');
       }
 
-      togglePop = () => {
-        this.setState({
-         seen: !this.state.seen
-        });
-       };
-
-      toggleCatgoTwoPop = () =>{
-        this.setState({
-        seenClueCatgoTwo : !this.state.seenClueCatgoTwo
-        });
-      } 
-
     getCallBackDataFromInputControl = (dataNumberOfCategories, dataNumberOfCluesCategoOne, dataNumberOfCluesCategoTwo, dataNumberOfCluesCategoThree) =>{
         var changedCategories = [];
         var changedCluesCatgoOne = [];
         var changedCluesCatgoTwo = [];
         var changedCluesCatgoThree = [];
-
-
 
         if(parseInt(dataNumberOfCategories) === 3){
             changedCategories = this.state.titleStore;
@@ -410,22 +327,24 @@ class RoundFirst extends React.Component {
             changedCategories = (this.state.titleStore).slice(0,parseInt(dataNumberOfCategories));
         }else if(parseInt(dataNumberOfCategories) === 1){
             changedCategories = (this.state.titleStore).slice(0,parseInt(dataNumberOfCategories));
-        }else if(parseInt(dataNumberOfCategories) === 0){
+        }
+        
+        // else if(parseInt(dataNumberOfCategories) === 0){
 
             /* disable clicks on all elements */
 
-            document.querySelector('#catOneQueAnsTwoHund').style.pointerEvents = 'none';
-            document.querySelector('#catOneQueAnsFourHund').style.pointerEvents = 'none';
-            document.querySelector('#catOneQueAnsSixHund').style.pointerEvents = 'none';
+        //     document.querySelector('#catOneQueAnsTwoHund').style.pointerEvents = 'none';
+        //     document.querySelector('#catOneQueAnsFourHund').style.pointerEvents = 'none';
+        //     document.querySelector('#catOneQueAnsSixHund').style.pointerEvents = 'none';
 
-            document.querySelector('#catTwoQueAnsTwoHund').style.pointerEvents = 'none';
-            document.querySelector('#catTwoQueAnsFourHund').style.pointerEvents = 'none';
-            document.querySelector('#catTwoQueAnsSixHund').style.pointerEvents = 'none';
+        //     document.querySelector('#catTwoQueAnsTwoHund').style.pointerEvents = 'none';
+        //     document.querySelector('#catTwoQueAnsFourHund').style.pointerEvents = 'none';
+        //     document.querySelector('#catTwoQueAnsSixHund').style.pointerEvents = 'none';
 
-            document.querySelector('#catThreeQueAnsTwoHund').style.pointerEvents = 'none';
-            document.querySelector('#catThreeQueAnsFourHund').style.pointerEvents = 'none';
-            document.querySelector('#catThreeQueAnsSixHund').style.pointerEvents = 'none';
-        }
+        //     document.querySelector('#catThreeQueAnsTwoHund').style.pointerEvents = 'none';
+        //     document.querySelector('#catThreeQueAnsFourHund').style.pointerEvents = 'none';
+        //     document.querySelector('#catThreeQueAnsSixHund').style.pointerEvents = 'none';
+        // }
 
         if((parseInt(dataNumberOfCluesCategoOne)) === 3){
             changedCluesCatgoOne = InitialCluesCatgoOne;
@@ -434,14 +353,7 @@ class RoundFirst extends React.Component {
            
             /* disable clicks on no data elements */
             document.querySelector('#catOneQueAnsSixHund').style.pointerEvents = 'none';
-
-            /* remove possible daily double */
-            /* Fail Safe logic -remove at last */
-            // if((this.state.dailyDoubleNotToConsiderMeIndicatorHolder).includes('3')){
-            //     let temp = [];
-            //     temp = removeSameItemFromArray(this.state.dailyDoubleConsiderMeIndicatorHolder, ('3'));
-            //         (this.state.dailyDoubleConsiderMeIndicatorHolder).push(temp);
-            // }            
+          
             let pass = '3';
             dailyDoubleNotToConsiderMeIndicatorHolder.push(pass);     
             
@@ -465,15 +377,13 @@ class RoundFirst extends React.Component {
             document.querySelector('#catOneQueAnsFourHund').style.pointerEvents = 'none';
             document.querySelector('#catOneQueAnsTwoHund').style.pointerEvents = 'none';
 
-            /* remove possible daily double */
-          
+            /* remove possible daily double */          
             let pass = '3';
             dailyDoubleNotToConsiderMeIndicatorHolder.push(pass);           
             let passSecondValue = '2';
             dailyDoubleNotToConsiderMeIndicatorHolder.push(passSecondValue);            
             let passThirdValue = '1';
-            dailyDoubleNotToConsiderMeIndicatorHolder.push(passThirdValue);  
-            
+            dailyDoubleNotToConsiderMeIndicatorHolder.push(passThirdValue);              
         }
 
         if((parseInt(dataNumberOfCluesCategoTwo)) === 3){
@@ -562,8 +472,6 @@ class RoundFirst extends React.Component {
             cluesCatgoTwo: changedCluesCatgoTwo,
             cluesCatgoThree: changedCluesCatgoThree
         });
-
-        console.log(changedCategories);
     }
 
 
@@ -573,34 +481,6 @@ class RoundFirst extends React.Component {
                 <div className="inputControlStyles">
                     <InputControl parentCallbackFromCurrentRound = {this.getCallBackDataFromInputControl}/>
                 </div>
-                {/* <div className="game-heading-board">
-                {this.state.categories.map((category, index) => (
-                    <div className="box headingCat">{category}</div>
-                ))}
-                </div>
-                <span className="game-clue-board">
-                {this.state.cluesCatgoOne.map((clueCatgoOne, index) => (
-                    <span className="box headingCat">{clueCatgoOne}</span>
-                ))}
-                </span>
-                <span className="game-clue-board">
-                {this.state.cluesCatgoTwo.map((clueCatgoTwo, index) => (
-                    <span className="box headingCat">{clueCatgoTwo}</span>
-                ))}
-                </span>
-                <span className="game-clue-board">
-                {this.state.cluesCatgoThree.map((clueCatgoThree, index) => (
-                    <span className="box headingCat">{clueCatgoThree}</span>
-                ))}
-                </span> */}
-
-                {/* <div>
-                    <DisplayCategoriesTitles />
-                </div> */}
-
-                <ClueModal show={this.state.show} handleClose={this.hideModal}>
-                    <p>ClueModal</p>
-                </ClueModal>
 
                 <div className="game-board">
                     <div className="box headingCat">{this.state.categories[0] ? this.state.categories[0] : ""}</div>
@@ -657,104 +537,13 @@ class RoundFirst extends React.Component {
                     </div>
                     {this.state.seenThirdCatSixHund ? <PopUp togglePopWindow={this.showcatThreeQueAnsSixHund} Question={this.state.catThreeQues[2]} Answer={this.state.catThreeAnswers[2]}  /> : null}
 
-                </div>
-
-                {/* <div className="game-board">
-                    <div className="box headingCat">SPORTS</div>
-                    <div className="box headingCat">ANIMALS</div>
-                    <div className="box headingCat">SCIENCE</div>
-                    <div className="box clueCat">$200</div>
-                    <div className="box clueCat">$200</div>
-                    <div className="box clueCat">$200</div>
-                    <div className="box clueCat">$400</div>
-                    <div className="box clueCat">$400</div>
-                    <div className="box clueCat">$400</div>
-                    <div className="box clueCat">$600</div>
-                    <div className="box clueCat">$600</div>
-                    <div className="box clueCat">$600</div>
-                </div> */}
-
-
-                {/* <div className="nextRoundBtnContainer">
-                    <button className="nextRoundBtn" id="nextRoundFromFirst" onClick={RoundSecond}>Next Round</button>
-                </div>     */}
-                {/* <div>
-                <div className="testModal" onClick={this.togglePop}><button>Try Me</button></div>
-                {this.state.seen ? <PopUp togglePopWindow={this.togglePop} content={this.showcatThreeQueAnsFourHund} Question={this.state.catThreeQues[0]} Answer={this.state.catThreeAnswers[0]}  /> : null}
-                </div> */}
-
-
-
-            {/* 
-                <div>
-                    <p>{this.state.catOneQues}</p>
-                </div>
-
-                <div>
-                    <p>{this.state.catOneAnswers}</p>
-                </div>
-
-                <div>
-                    <p>{this.state.catTwoQues}</p>
-                </div>
-
-                <div>
-                    <p>{this.state.catTwoAnswers}</p>
-                </div>
-
-                <div>
-                    <p>{this.state.catThreeQues}</p>
-                </div>
-
-                <div>
-                    <p>{this.state.catThreeAnswers}</p>
-                </div>
-             */}
-            </div>
-    
+                </div>  
+            </div>    
       );
     }
 
 }
 
-// function FetchClues(appliedUrl){
-
-//     const cluesUrl = appliedUrl;
-//     const queArray = [];
-//     const ansArray = [];
-
-//     fetch(cluesUrl)
-//     .then(response => {
-//     if(!response.ok) {
-//       throw new Error('Something went wrong, please try again later.')
-//     }
-//     return response;
-//     })
-//     .then(response => response.json())
-//     .then(data => {
-//       console.log(data);
-//       console.log(data.clues);
-//       console.log(data['clues_count']);
-//       console.log(data.clues[0]);
-//       if(3< parseInt(data['clues_count'])){
-//         for(let i=0; i<3; i++){
-
-//             queArray.push(data.clues[i]['question']);
-//             ansArray.push(data.clues[i]['answer']);
-//         }
-//         console.log(queArray);
-//         console.log(ansArray);
-//       }
-//     })
-//     .catch(err =>{
-//         console.log(err.message);
-//     });
-//     console.log("Nesh Me");
-//     console.log(queArray);
-//     return(
-//         "trial Me BETA"
-//     );
-// }
 
 function getRandomArbitrary(min, max) {
     min = Math.ceil(min);
@@ -762,13 +551,13 @@ function getRandomArbitrary(min, max) {
     return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
   }
 
-function removeSameItemFromArray(arr, item){
-    const result = arr.filter(function(x){
-        return x !== item;
-    });
+// function removeSameItemFromArray(arr, item){
+//     const result = arr.filter(function(x){
+//         return x !== item;
+//     });
 
-    return result;
-}
+//     return result;
+// }
   
 
 export default RoundFirst;

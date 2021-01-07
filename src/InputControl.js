@@ -26,7 +26,6 @@ class InputControl extends React.Component {
       });
 
     var catValue = target.value;
-    console.log(catValue);
     this.displayOrNotElement(catValue);
     }
 
@@ -70,8 +69,6 @@ class InputControl extends React.Component {
         this.setState({
              numberOfCluesCategoOne: valueCatOne
         });
-        console.log("handleInputCatOneChange: ");
-        console.log(valueCatOne);
     }
 
     handleInputCatTwoChange(event){
@@ -80,8 +77,6 @@ class InputControl extends React.Component {
         this.setState({
              numberOfCluesCategoTwo: valueCatTwo
         });
-        console.log("handleInputCatTwoChange: ");
-        console.log(valueCatTwo);
     }
 
     handleInputCatThreeChange(event){
@@ -90,8 +85,6 @@ class InputControl extends React.Component {
         this.setState({
              numberOfCluesCategoThree: valueCatThree
         });
-        console.log("handleInputCatThreeChange: ");
-        console.log(valueCatThree);
     }
 
     sendCatSelectionData(event){
@@ -110,15 +103,12 @@ class InputControl extends React.Component {
         this.setState({numberOfCategories: 3,
             numberOfCluesCategoOne: 3,
             numberOfCluesCategoTwo: 3,
-            numberOfCluesCategoThree: 3});
-        
+            numberOfCluesCategoThree: 3});        
     }
 
     handleResetAction(event){
         window.location.reload();
     }
-
-
   
     render() {
       return (

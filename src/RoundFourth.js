@@ -18,11 +18,7 @@ function RoundFourth() {
                 <div className="box clueCat">$2400</div>
                 <div className="box clueCat">$2400</div>
             </div>
-            {/* <div className="nextRoundBtnContainer">
-                <button className="nextRoundBtn" id="nextRoundFromFirst">Next Round</button>
-            </div>     */}
         </div>
-
   );
 }
 

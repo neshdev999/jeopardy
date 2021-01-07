@@ -18,9 +18,6 @@ function RoundSecond() {
                 <div className="box clueCat">$1200</div>
                 <div className="box clueCat">$1200</div>
             </div>
-            {/* <div className="nextRoundBtnContainer">
-                <button className="nextRoundBtn" id="nextRoundFromFirst">Next Round</button>
-            </div>     */}
         </div>
 
   );

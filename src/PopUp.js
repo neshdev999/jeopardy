@@ -4,11 +4,9 @@ import './PopUp.css';
 class PopUp extends Component {
     handleClick = () => {
      this.props.togglePopWindow();
-
     };
 
     flip = () =>{
-
         var displayQuestion = document.querySelector('.frontCardQue');
         var displayAnswer = document.querySelector('.backCardAnswer');
         if (displayQuestion.style.display === "none") {
@@ -18,16 +16,12 @@ class PopUp extends Component {
           displayQuestion.style.display = "none";
           displayAnswer.style.display = "block";
         }
-
     }
     
     render() {
-    return (
-     <div className="modal">
+    return (  
        <div className="modal_content">
-
        <p></p>
-
        <div className="container">
             <p className="frontCardQue">{this.props.Question}</p>
             <p className="backCardAnswer">{this.props.Answer}</p>       
@@ -36,8 +30,7 @@ class PopUp extends Component {
         <button onClick={this.flip}>Clue/Question</button>
         <button className="close" onClick={this.handleClick}>Done</button>
        </div>
-      </div>
-     </div>
+      </div>   
     );
    }
   }
