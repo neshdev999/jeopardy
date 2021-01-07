@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:ital,wght@1,300&display=swap');
 .btn {
     text-align: center;
     position: absolute;
@@ -49,6 +50,10 @@ button:hover {
     z-index: 10000;
     border: 2px solid gray;
     background-color: rgba(255, 255, 255, 0.91);
+    background-color: #121070;
+    font-family: 'Alegreya Sans SC', sans-serif;
+    font-size: 20px;
+    color: #FFFFFF;
 }
 
 .close {

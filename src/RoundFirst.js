@@ -178,9 +178,6 @@ class RoundFirst extends React.Component {
       applyDailyDouble = (activationKey) =>{
 
         let randomKeyReceived = this.state.dailyDoubleKeysKeeper[Math.floor(random(1,((this.state.dailyDoubleKeysKeeper).length)))-1];
-        console.log("Nesh");
-        console.log(randomKeyReceived);
-        console.log(typeof(randomKeyReceived));
         let randomKey = parseInt(randomKeyReceived);
         // let randomKey = getRandomArbitrary(1,9);
         let convertedActivationKey = parseInt(activationKey);
@@ -357,23 +354,6 @@ class RoundFirst extends React.Component {
         }else if(parseInt(dataNumberOfCategories) === 1){
             changedCategories = (this.state.titleStore).slice(0,parseInt(dataNumberOfCategories));
         }
-        
-        // else if(parseInt(dataNumberOfCategories) === 0){
-
-            /* disable clicks on all elements */
-
-        //     document.querySelector('#catOneQueAnsTwoHund').style.pointerEvents = 'none';
-        //     document.querySelector('#catOneQueAnsFourHund').style.pointerEvents = 'none';
-        //     document.querySelector('#catOneQueAnsSixHund').style.pointerEvents = 'none';
-
-        //     document.querySelector('#catTwoQueAnsTwoHund').style.pointerEvents = 'none';
-        //     document.querySelector('#catTwoQueAnsFourHund').style.pointerEvents = 'none';
-        //     document.querySelector('#catTwoQueAnsSixHund').style.pointerEvents = 'none';
-
-        //     document.querySelector('#catThreeQueAnsTwoHund').style.pointerEvents = 'none';
-        //     document.querySelector('#catThreeQueAnsFourHund').style.pointerEvents = 'none';
-        //     document.querySelector('#catThreeQueAnsSixHund').style.pointerEvents = 'none';
-        // }
 
         if((parseInt(dataNumberOfCluesCategoOne)) === 3){
             changedCluesCatgoOne = InitialCluesCatgoOne;
@@ -570,7 +550,6 @@ class RoundFirst extends React.Component {
     }
 
 }
-
 
 function getRandomArbitrary(min, max) {
     min = Math.ceil(min);
