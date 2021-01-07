@@ -6,7 +6,6 @@ import PopUp from "./PopUp.js";
 
 // Global Variables
 
-const dailyDoubleNotToConsiderMeIndicatorHolder = [];
 const InitialCluesCatgoOne = ['$200', '$400', '$600'];
 const InitialCluesCatgoTwo = ['$200', '$400', '$600'];
 const InitialCluesCatgoThree = ['$200', '$400', '$600'];
@@ -47,7 +46,8 @@ class RoundFirst extends React.Component {
             seenThirdCatTwoHund: false,
             seenThirdCatFourHund: false,
             seenThirdCatSixHund: false,
-            dailDoubleCheckFlag: false
+            dailDoubleCheckFlag: false,
+            dailyDoubleKeysKeeper: []
         }; 
         this.showModal = this.showModal.bind(this);
         this.hideModal = this.hideModal.bind(this);
@@ -63,6 +63,20 @@ class RoundFirst extends React.Component {
       }
 
       componentDidMount() {
+
+                /* Make clicks locked on page */
+
+            document.querySelector('#catOneQueAnsTwoHund').style.pointerEvents = 'none';
+            document.querySelector('#catOneQueAnsFourHund').style.pointerEvents = 'none';
+            document.querySelector('#catOneQueAnsSixHund').style.pointerEvents = 'none';
+
+            document.querySelector('#catTwoQueAnsTwoHund').style.pointerEvents = 'none';
+            document.querySelector('#catTwoQueAnsFourHund').style.pointerEvents = 'none';
+            document.querySelector('#catTwoQueAnsSixHund').style.pointerEvents = 'none';
+
+            document.querySelector('#catThreeQueAnsTwoHund').style.pointerEvents = 'none';
+            document.querySelector('#catThreeQueAnsFourHund').style.pointerEvents = 'none';
+            document.querySelector('#catThreeQueAnsSixHund').style.pointerEvents = 'none';
 
         let getRandomOffsetValue = getRandomArbitrary(10,5000);
         let titleAndAllDataApiUrl = 'http://jservice.io/api/categories?count=15&offset=' + getRandomOffsetValue;
@@ -163,82 +177,97 @@ class RoundFirst extends React.Component {
 
       applyDailyDouble = (activationKey) =>{
 
-        var tempKey = getRandomArbitrary(1,9);
-
-        while(true){
-            if(dailyDoubleNotToConsiderMeIndicatorHolder.includes(tempKey)){
-                tempKey = getRandomArbitrary(1,9);
-            }else{
-                break;
-            }
-        }
-
-
-        let randomKey = getRandomArbitrary(1,9);
+        let randomKeyReceived = this.state.dailyDoubleKeysKeeper[Math.floor(random(1,((this.state.dailyDoubleKeysKeeper).length)))-1];
+        console.log("Nesh");
+        console.log(randomKeyReceived);
+        console.log(typeof(randomKeyReceived));
+        let randomKey = parseInt(randomKeyReceived);
+        // let randomKey = getRandomArbitrary(1,9);
         let convertedActivationKey = parseInt(activationKey);
-
 
         switch(randomKey){
             case 1:
                 if((convertedActivationKey === randomKey) && (this.state.dailDoubleCheckFlag === false)){
                     alert("Daily Double");
-                     this.state.dailDoubleCheckFlag = true;
+                    this.setState({
+                        dailDoubleCheckFlag: true
+                    });              
                 }
                 break;
             case 2:
                 if((convertedActivationKey === randomKey) && (this.state.dailDoubleCheckFlag === false)){
                     alert("Daily Double");
-                     this.state.dailDoubleCheckFlag = true;
+                    this.setState({
+                        dailDoubleCheckFlag: true
+                    });    
                 }
                 break;
             case 3:
                 if((convertedActivationKey === randomKey) && (this.state.dailDoubleCheckFlag === false)){
                     alert("Daily Double");
-                     this.state.dailDoubleCheckFlag = true;
+                    this.setState({
+                        dailDoubleCheckFlag: true
+                    });    
                 }
                 break;
             case 4:
                 if((convertedActivationKey === randomKey) && (this.state.dailDoubleCheckFlag === false)){
                     alert("Daily Double");
-                     this.state.dailDoubleCheckFlag = true;
+                    this.setState({
+                        dailDoubleCheckFlag: true
+                    });    
                 }
                 break;
             case 5:
                 if((convertedActivationKey === randomKey) && (this.state.dailDoubleCheckFlag === false)){
                     alert("Daily Double");
-                     this.state.dailDoubleCheckFlag = true;
+                    this.setState({
+                        dailDoubleCheckFlag: true
+                    });    
                 }
                 break;
             case 6:
                 if((convertedActivationKey === randomKey) && (this.state.dailDoubleCheckFlag === false)){
                     alert("Daily Double");
-                     this.state.dailDoubleCheckFlag = true;
+                    this.setState({
+                        dailDoubleCheckFlag: true
+                    });    
                 }
                 break;
             case 7:
                 if((convertedActivationKey === randomKey) && (this.state.dailDoubleCheckFlag === false)){
                     alert("Daily Double");
-                     this.state.dailDoubleCheckFlag = true;
+                    this.setState({
+                        dailDoubleCheckFlag: true
+                    });    
                 }
                 break;
             case 8:
                 if((convertedActivationKey === randomKey) && (this.state.dailDoubleCheckFlag === false)){
                     alert("Daily Double");
-                     this.state.dailDoubleCheckFlag = true;
+                    this.setState({
+                        dailDoubleCheckFlag: true
+                    });    
                 }
                 break;
             case 9:
                 if((convertedActivationKey === randomKey) && (this.state.dailDoubleCheckFlag === false)){
                     alert("Daily Double");
-                     this.state.dailDoubleCheckFlag = true;
+                    this.setState({
+                        dailDoubleCheckFlag: true
+                    });    
                 }
                 break;
+            default:
+                //do nothing
+                break;              
+            
         }
       }
 
 
 
-      showcatOneQueAnsTwoHund = () =>{
+      showcatOneQueAnsTwoHund = () =>{         
         this.setState({
             seenFirstCatTwoHund: !this.state.seenFirstCatTwoHund
         });
@@ -348,15 +377,25 @@ class RoundFirst extends React.Component {
 
         if((parseInt(dataNumberOfCluesCategoOne)) === 3){
             changedCluesCatgoOne = InitialCluesCatgoOne;
+
+            /* Daily Double */
+            let dailyDoubleKeysKeeper = [...this.state.dailyDoubleKeysKeeper];
+            dailyDoubleKeysKeeper.push('1');
+            dailyDoubleKeysKeeper.push('2');
+            dailyDoubleKeysKeeper.push('3');
+            this.setState({dailyDoubleKeysKeeper});
+
         }else if((parseInt(dataNumberOfCluesCategoOne)) === 2){
             changedCluesCatgoOne = (InitialCluesCatgoOne).slice(0,parseInt(dataNumberOfCluesCategoOne));
            
             /* disable clicks on no data elements */
             document.querySelector('#catOneQueAnsSixHund').style.pointerEvents = 'none';
-          
-            let pass = '3';
-            dailyDoubleNotToConsiderMeIndicatorHolder.push(pass);     
-            
+
+            /* Daily Double */
+            let dailyDoubleKeysKeeper = [...this.state.dailyDoubleKeysKeeper];
+            dailyDoubleKeysKeeper.push('1');
+            dailyDoubleKeysKeeper.push('2');
+            this.setState({dailyDoubleKeysKeeper});            
 
         }else if((parseInt(dataNumberOfCluesCategoOne)) === 1){
             changedCluesCatgoOne = (InitialCluesCatgoOne).slice(0,parseInt(dataNumberOfCluesCategoOne));
@@ -364,39 +403,39 @@ class RoundFirst extends React.Component {
             document.querySelector('#catOneQueAnsSixHund').style.pointerEvents = 'none';
             document.querySelector('#catOneQueAnsFourHund').style.pointerEvents = 'none';
 
-            /* remove possible daily double */          
-            let pass = '3';
-            dailyDoubleNotToConsiderMeIndicatorHolder.push(pass);          
-            let passSecondValue = '2';
-            dailyDoubleNotToConsiderMeIndicatorHolder.push(passSecondValue);
+            /* Daily Double */
+            let dailyDoubleKeysKeeper = [...this.state.dailyDoubleKeysKeeper];
+            dailyDoubleKeysKeeper.push('1');
+            this.setState({dailyDoubleKeysKeeper});   
 
         }else{
             changedCluesCatgoOne = [];
             /* disable clicks on no data elements */
             document.querySelector('#catOneQueAnsSixHund').style.pointerEvents = 'none';
             document.querySelector('#catOneQueAnsFourHund').style.pointerEvents = 'none';
-            document.querySelector('#catOneQueAnsTwoHund').style.pointerEvents = 'none';
-
-            /* remove possible daily double */          
-            let pass = '3';
-            dailyDoubleNotToConsiderMeIndicatorHolder.push(pass);           
-            let passSecondValue = '2';
-            dailyDoubleNotToConsiderMeIndicatorHolder.push(passSecondValue);            
-            let passThirdValue = '1';
-            dailyDoubleNotToConsiderMeIndicatorHolder.push(passThirdValue);              
+            document.querySelector('#catOneQueAnsTwoHund').style.pointerEvents = 'none';            
         }
 
         if((parseInt(dataNumberOfCluesCategoTwo)) === 3){
             changedCluesCatgoTwo = InitialCluesCatgoTwo;
+            
+            /* Daily Double */
+            let dailyDoubleKeysKeeper = [...this.state.dailyDoubleKeysKeeper];
+            dailyDoubleKeysKeeper.push('4');
+            dailyDoubleKeysKeeper.push('5');
+            dailyDoubleKeysKeeper.push('6');
+            this.setState({dailyDoubleKeysKeeper});
         }else if((parseInt(dataNumberOfCluesCategoTwo)) === 2){
             changedCluesCatgoTwo = (InitialCluesCatgoTwo).slice(0,parseInt(dataNumberOfCluesCategoTwo));
             
             /* disable clicks on no data elements */
             document.querySelector('#catTwoQueAnsSixHund').style.pointerEvents = 'none';
 
-            /* remove possible daily double */
-            let pass = '6';
-            dailyDoubleNotToConsiderMeIndicatorHolder.push(pass);     
+            /* Daily Double */
+            let dailyDoubleKeysKeeper = [...this.state.dailyDoubleKeysKeeper];
+            dailyDoubleKeysKeeper.push('4');
+            dailyDoubleKeysKeeper.push('5');
+            this.setState({dailyDoubleKeysKeeper});    
         }else if((parseInt(dataNumberOfCluesCategoTwo)) === 1){
             changedCluesCatgoTwo = (InitialCluesCatgoTwo).slice(0,parseInt(dataNumberOfCluesCategoTwo));
             
@@ -404,62 +443,50 @@ class RoundFirst extends React.Component {
             document.querySelector('#catTwoQueAnsSixHund').style.pointerEvents = 'none';
             document.querySelector('#catTwoQueAnsFourHund').style.pointerEvents = 'none';
 
-            /* remove possible daily double */
-            let pass = '6';
-            dailyDoubleNotToConsiderMeIndicatorHolder.push(pass);
-            let passSecondValue = '5';
-            dailyDoubleNotToConsiderMeIndicatorHolder.push(passSecondValue);    
+            /* Daily Double */
+            let dailyDoubleKeysKeeper = [...this.state.dailyDoubleKeysKeeper];
+            dailyDoubleKeysKeeper.push('4');
+            this.setState({dailyDoubleKeysKeeper});  
         }else{
             changedCluesCatgoTwo = [];
             /* disable clicks on no data elements */
             document.querySelector('#catTwoQueAnsSixHund').style.pointerEvents = 'none';
             document.querySelector('#catTwoQueAnsFourHund').style.pointerEvents = 'none';
-            document.querySelector('#catTwoQueAnsTwoHund').style.pointerEvents = 'none';
-            
-            /* remove possible daily double */
-            let pass = '6';
-            dailyDoubleNotToConsiderMeIndicatorHolder.push(pass);
-            let passSecondValue = '5';
-            dailyDoubleNotToConsiderMeIndicatorHolder.push(passSecondValue);
-            let passThirdValue = '4';
-            dailyDoubleNotToConsiderMeIndicatorHolder.push(passThirdValue);   
+            document.querySelector('#catTwoQueAnsTwoHund').style.pointerEvents = 'none'; 
         }
 
         if((parseInt(dataNumberOfCluesCategoThree)) === 3){
             changedCluesCatgoThree = InitialCluesCatgoThree;
+
+            let dailyDoubleKeysKeeper = [...this.state.dailyDoubleKeysKeeper];
+            dailyDoubleKeysKeeper.push('7');
+            dailyDoubleKeysKeeper.push('8');
+            dailyDoubleKeysKeeper.push('9');
+            this.setState({dailyDoubleKeysKeeper});
         }else if((parseInt(dataNumberOfCluesCategoThree)) === 2){
             changedCluesCatgoThree = (InitialCluesCatgoThree).slice(0,parseInt(dataNumberOfCluesCategoThree));
             /* disable clicks on no data elements */
             document.querySelector('#catThreeQueAnsSixHund').style.pointerEvents = 'none';
 
-            /* remove possible daily double */
-            let pass = '9';
-            dailyDoubleNotToConsiderMeIndicatorHolder.push(pass);  
+            let dailyDoubleKeysKeeper = [...this.state.dailyDoubleKeysKeeper];
+            dailyDoubleKeysKeeper.push('7');
+            dailyDoubleKeysKeeper.push('8');
+            this.setState({dailyDoubleKeysKeeper});  
         }else if((parseInt(dataNumberOfCluesCategoThree)) === 1){
             changedCluesCatgoThree = (InitialCluesCatgoThree).slice(0,parseInt(dataNumberOfCluesCategoThree));
             /* disable clicks on no data elements */
             document.querySelector('#catThreeQueAnsSixHund').style.pointerEvents = 'none';
             document.querySelector('#catThreeQueAnsFourHund').style.pointerEvents = 'none';
             
-            /* remove possible daily double */
-            let pass = '9';
-            dailyDoubleNotToConsiderMeIndicatorHolder.push(pass);
-            let passSecondValue = '8';
-            dailyDoubleNotToConsiderMeIndicatorHolder.push(passSecondValue);  
+            let dailyDoubleKeysKeeper = [...this.state.dailyDoubleKeysKeeper];
+            dailyDoubleKeysKeeper.push('7');
+            this.setState({dailyDoubleKeysKeeper});  
         }else{
             changedCluesCatgoThree = [];
             /* disable clicks on no data elements */
             document.querySelector('#catThreeQueAnsSixHund').style.pointerEvents = 'none';
             document.querySelector('#catThreeQueAnsFourHund').style.pointerEvents = 'none';
             document.querySelector('#catThreeQueAnsTwoHund').style.pointerEvents = 'none';
-
-            /* remove possible daily double */
-            let pass = '9';
-            dailyDoubleNotToConsiderMeIndicatorHolder.push(pass);
-            let passSecondValue = '8';
-            dailyDoubleNotToConsiderMeIndicatorHolder.push(passSecondValue);
-            let passThirdValue = '7';
-            dailyDoubleNotToConsiderMeIndicatorHolder.push(passThirdValue); 
         }
       
         this.setState({
@@ -558,6 +585,10 @@ function getRandomArbitrary(min, max) {
 
 //     return result;
 // }
+
+function random(mn, mx) {  
+    return Math.random() * (mx - mn) + mn;  
+}  
   
 
 export default RoundFirst;

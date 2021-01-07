@@ -59,6 +59,9 @@ class InputControl extends React.Component {
                 catOne.style.display = 'block';
                 catTwo.style.display = 'block';   
                 catThree.style.display = 'block';
+                break;
+            default:
+                // do nothing
                 break;               
         }
     }
@@ -99,6 +102,21 @@ class InputControl extends React.Component {
 
     handleSubmitCatSelectionForm(event){
         event.preventDefault();
+
+        /* Make clicks available after applying choices */
+
+        document.querySelector('#catOneQueAnsTwoHund').style.pointerEvents = 'auto';
+        document.querySelector('#catOneQueAnsFourHund').style.pointerEvents = 'auto';
+        document.querySelector('#catOneQueAnsSixHund').style.pointerEvents = 'auto';
+
+        document.querySelector('#catTwoQueAnsTwoHund').style.pointerEvents = 'auto';
+        document.querySelector('#catTwoQueAnsFourHund').style.pointerEvents = 'auto';
+        document.querySelector('#catTwoQueAnsSixHund').style.pointerEvents = 'auto';
+
+        document.querySelector('#catThreeQueAnsTwoHund').style.pointerEvents = 'auto';
+        document.querySelector('#catThreeQueAnsFourHund').style.pointerEvents = 'auto';
+        document.querySelector('#catThreeQueAnsSixHund').style.pointerEvents = 'auto';
+
         this.sendCatSelectionData(event);
         this.setState({numberOfCategories: 3,
             numberOfCluesCategoOne: 3,
